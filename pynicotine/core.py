@@ -20,7 +20,7 @@ class Core:
                  "uploads", "interests", "userbrowse", "userinfo", "buddies", "privatechat",
                  "chatrooms", "pluginhandler", "now_playing", "portmapper", "notifications",
                  "port_checker", "update_checker", "_network_thread", "cli_interface_address",
-                 "cli_listen_port", "enabled_components")
+                 "cli_listen_port", "enabled_components", "web_api")
 
     def __init__(self):
 
@@ -44,6 +44,7 @@ class Core:
         self.port_checker = None
         self.update_checker = None
         self._network_thread = None
+        self.web_api = None
 
         self.cli_interface_address = None
         self.cli_listen_port = None
@@ -58,7 +59,7 @@ class Core:
                 "error_handler", "signal_handler", "cli", "portmapper", "network_thread", "shares", "users",
                 "notifications", "network_filter", "now_playing", "statistics", "port_checker", "update_checker",
                 "search", "downloads", "uploads", "interests", "userbrowse", "userinfo", "buddies",
-                "chatrooms", "privatechat", "pluginhandler"
+                "chatrooms", "privatechat", "pluginhandler", "web_api"
             }
 
         self.enabled_components = enabled_components
@@ -164,6 +165,10 @@ class Core:
         if "pluginhandler" in enabled_components:
             from pynicotine.pluginsystem import PluginHandler
             self.pluginhandler = PluginHandler(isolated_mode)
+
+        if "web_api" in enabled_components:
+            from pynicotine.webapi import WebApiComponent
+            self.web_api = WebApiComponent()
 
     def _init_signal_handler(self):
         """Handle Ctrl+C and "kill" exit gracefully."""

@@ -1321,3 +1321,6 @@ class Downloads(Transfers):
 
         download.queue_position = msg.place
         self._update_transfer(download, update_parent=False)
+
+    def get_transfer_list(self) -> list:
+        return list(self.transfers.values())

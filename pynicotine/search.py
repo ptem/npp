@@ -119,7 +119,7 @@ class Search:
         """Disallow parsing search result messages for a search ID."""
         SEARCH_TOKENS_ALLOWED.discard(token)
 
-    def do_search(self, search_term, mode, room=None, users=None, switch_page=True):
+    def do_search(self, search_term, mode, room=None, users=None, switch_page=True) -> int:
 
         # Validate search term and run it through plugins
         search_term, room, users = self._process_search_term(search_term, mode, room, users)
@@ -142,6 +142,8 @@ class Search:
 
         self.send_search_request(search.token)
         events.emit("add-search", search.token, search, switch_page)
+
+        return self.token
 
     def send_search_request(self, token):
 

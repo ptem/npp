@@ -953,7 +953,14 @@ class Shares:
         shared_buddy_folders = config.sections["transfers"]["buddyshared"]
         shared_trusted_folders = config.sections["transfers"]["trustedshared"]
 
+        shared_public_folders = [(x[0], self.normalize_path(x[1])) for x in shared_public_folders]
+        shared_buddy_folders = [(x[0], self.normalize_path(x[1])) for x in shared_buddy_folders]
+        shared_trusted_folders = [(x[0], self.normalize_path(x[1])) for x in shared_trusted_folders]
+
         return shared_public_folders, shared_buddy_folders, shared_trusted_folders
+
+    def normalize_path(self, path : str):
+        return os.path.normpath(os.path.expandvars(path))
 
     def get_normalized_virtual_name(self, virtual_name, shared_folders=None):
 

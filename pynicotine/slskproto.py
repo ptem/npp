@@ -1195,16 +1195,18 @@ class NetworkThread(Thread):
         conn.is_established = True
         server_hostname, server_port = conn.addr
 
-        log.add(
-            _("Connected to server %(host)s:%(port)s, logging in…"), {
-                "host": server_hostname,
-                "port": server_port
-            }
-        )
 
         login, password = conn.login
         self._user_addresses[login] = (self._local_ip_address, self._listen_port)
         conn.login = True
+
+        log.add(
+            _("Connected to server %(host)s:%(port)s, logging in with user '%(login)s'…"), {
+                "host": server_hostname,
+                "port": server_port,
+                "login": login
+            }
+        )
 
         self._server_address = conn.addr
         self._server_username = self._branch_root = login

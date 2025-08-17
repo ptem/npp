@@ -40,7 +40,15 @@ class Config:
     def __init__(self):
 
         config_folder_path, data_folder_path = self.get_user_folders()
-        self.set_config_file(os.path.join(config_folder_path, "config"))
+        # self.set_config_file(os.path.join(config_folder_path, "config"))
+        gettrace = getattr(sys, 'gettrace', None)
+
+        if gettrace:
+            #Debugger attached
+            self.set_config_file(os.path.join(config_folder_path, "config_dev"))
+        else:
+            self.set_config_file(os.path.join(config_folder_path, "config"))
+
         self.set_data_folder(data_folder_path)
 
         self.config_loaded = False
@@ -175,7 +183,8 @@ class Config:
                 "downloaddir": os.path.join(data_home_env, "downloads"),
                 "uploaddir": os.path.join(data_home_env, "received"),
                 "usernamesubfolders": False,
-                "shared": [],
+                # "shared": [],
+                "shared": [('uploads', os.path.join("${NICOTINE_DATA_HOME}", "uploads"))],
                 "buddyshared": [],
                 "trustedshared": [],
                 "uploadbandwidth": 50,
@@ -289,10 +298,10 @@ class Config:
                 "chat_room": {}
             },
             "searches": {
-                "expand_searches": True,
+                "expand_searches": False,
                 "group_searches": "folder_grouping",
                 "maxresults": 300,
-                "enable_history": True,
+                "enable_history": False,
                 "history": [],
                 "enablefilters": False,
                 "filters_visible": False,
@@ -423,6 +432,12 @@ class Config:
                 "started_uploads": 0,
                 "completed_uploads": 0,
                 "uploaded_size": 0
+            },
+            "web_api":{
+                "enable": True,
+                "local_up": "0.0.0.0",
+                "local_port": 7770,
+                "max_simultaneous_searches": 10
             }
         }
 
