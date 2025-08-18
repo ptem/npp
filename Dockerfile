@@ -21,8 +21,12 @@ COPY pynicotine /usr/nicotine/app/pynicotine
 COPY nicotine /usr/nicotine/app/nicotine
 COPY requirements.txt /usr/nicotine/app/requirements.txt
 
+# Copy VPN port overwrite
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
 # Install Python dependencies
 RUN pip3 install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org -r requirements.txt
 
 # Entrypoint
-ENTRYPOINT ["python3", "./nicotine", "--headless"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
