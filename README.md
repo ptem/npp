@@ -1,88 +1,41 @@
-<!--
-  SPDX-FileCopyrightText: 2013-2025 Nicotine+ Contributors
-  SPDX-License-Identifier: GPL-3.0-or-later
--->
+# npp
+(a nicotine++ (a nicotine+ (a graphical client for the Soulseek peer-to-peer network) fork) fork)
 
-# Nicotine+
-
-<img src="data/icons/icon.svg" alt="Nicotine+ Logo" align="right"
- width="128" height="128">
-
-Nicotine+ is a graphical client for the [Soulseek](https://www.slsknet.org/news/)
-peer-to-peer network.
-
-Nicotine+ aims to be a lightweight, pleasant, free and open source (FOSS)
-alternative to the official Soulseek client, while also providing a
-comprehensive set of features.
-
-Nicotine+ is written in Python and uses GTK for its graphical user interface.
-
-Check out the [screenshots](data/screenshots/SCREENSHOTS.md)
-and [source code](https://github.com/nicotine-plus/nicotine-plus).
+Nicotine++ is a vitaminized version of the popular [Soulseek](https://www.slsknet.org/) client [Nicotine+](https://nicotine-plus.org/), designed to run headlessly in a docker container and expose an API s.t. any client may search/download using the Soulseek P2P network. This project aims to expand the API for the purpose of being used in `recotine`, an in-development automated music discovery tool for Navidrome and similar Subsonic-API reliant music servers.
 
 
-## Download
+## Prerequisites
 
-The current stable version of Nicotine+ is 3.3.10, released on March 10, 2025.
-See the [release notes](NEWS.md).
+- Docker v20 or higher.
+- Docker compose v2.
 
-Downloads are available for:
+## Install
 
- - [GNU/Linux, *BSD, Haiku and Solaris](doc/DOWNLOADS.md#gnulinux-bsd-haiku-solaris)
- - [Windows](doc/DOWNLOADS.md#windows)
- - [macOS](doc/DOWNLOADS.md#macos)
+The installation steps are:
 
+1. Checkout the repository in your machine.
+2. The next step is optional. If you want to define your own folder structure where the files are downloaded you have to edit the `docker-compose.yaml` file. You only have to change the path that is before the colon `:`.
+    ```
+    volumes:
+      - ./npp_data/transfers/downloads:/data/nicotine/downloads
+      - ./npp_data/transfers/incomplete:/data/nicotine/incomplete
+      - ./npp_data/transfers/received:/data/nicotine/received
+      - ./npp_data/config:/config/nicotine
+    
+    ```
+3. Open a command prompt, navigate to the repository root folder and run the following command:  
+   - Windows: ```docker compose up -d --build```
+   - Raspberry Pi: ```docker-compose up -d --build``` (make sure that the package ```docker-compose``` is installed in your Raspi)
 
-## Get Involved
+And that's it! Nicotine++ should be now running on your machine. 
 
-If you feel like contributing to Nicotine+, there are several ways to get
-involved:
+When you create the docker container for the first time, by default, Nicotine++ will generate random user and password so that you can connect to the network. In case you want to use your own credentials you can stop the container and change them in the config file. Once you save the changes on the configuration file, the container will read and use the new credentials.
 
- - [Issue Tracker](https://github.com/nicotine-plus/nicotine-plus/issues)
-     – Report a problem or suggest improvements
- - [Testing](doc/TESTING.md)
-     – Download the latest unstable build and help test Nicotine+
- - [Translations](doc/TRANSLATIONS.md)
-     – Translate Nicotine+ into another language with [Weblate](https://hosted.weblate.org/engage/nicotine-plus)
- - [Packaging](doc/PACKAGING.md)
-     – Package Nicotine+ for a distribution or operating system
- - [Development](doc/DEVELOPING.md)
-     – Implement bug fixes, enhancements or new features
- - [IRC Channel](https://web.libera.chat/?channel=#nicotine+)
-     – Chat in the #nicotine+ IRC channel on [Libera.Chat](https://libera.chat/)
+## API
 
+```
+Documentation under construction
+```
 
-## Where did the name Nicotine come from?
-
-> I was in a geeky mood and was browsing bash.org's QDB.  
-I stumbled across this quote:  
->> **\<etc>** so tempting to release a product called 'nicotine' and wait for
->> the patches.  
->> **\<etc>** then i would have a reason to only apply one patch a day.
->> otherwise, i'm going against medical advise.  
->
-> So I thought what the hell and bluntly stole etc's idea.
-
-— <cite>Hyriand, former Nicotine maintainer, 2003</cite>
-
-
-## Legal and Privacy
-
-The Nicotine+ Team does not collect any data used or stored by the client.
-Different policies may apply for data sent to the default Soulseek server,
-which is not operated by the Nicotine+ Team.
-
-When connecting to the default Soulseek server, you agree to abide by the
-Soulseek [rules](https://www.slsknet.org/news/node/681) and
-[terms of service](https://www.slsknet.org/news/node/682).
-
-Soulseek is an unencrypted protocol not intended for secure communication.
-
-
-## Authors
-
-Nicotine+ is free and open source software, released under the terms of the
-[GNU General Public License v3.0 or later](https://www.gnu.org/licenses/gpl-3.0-standalone.html).
-Nicotine+ exists thanks to its [authors](AUTHORS.md).
-
-© 2001–2025 Nicotine+, Nicotine and PySoulSeek Contributors
+## Nicotine+
+In case you want further information about Nicotine+ and its source code, please check the original repository [here](https://github.com/nicotine-plus/nicotine-plus).
