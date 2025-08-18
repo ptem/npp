@@ -23,9 +23,10 @@ pynicotine/tests/**/*.json
 pynicotine/tests/**/*.old
 pynicotine/tests/**/*.wav
 
-# Ignore venv files
+# Ignore venv, env, .env, etc.
 venv/*
 .env/
+.env
 .idea/*
 .junie/*
 
