@@ -23,6 +23,7 @@ services:
 
       VPN_PORT_FORWARDING: on
       VPN_PORT_FORWARDING_STATUS_FILE: /tmp/gluetun/forwarded_port
+      FIREWALL_INPUT_PORTS: 7770
       PUBLICIP_FILE: /tmp/gluetun/ip
       LOG_LEVEL: info
     healthcheck:
@@ -31,6 +32,8 @@ services:
       timeout: 5s
       retries: 30
       start_period: 60s
+    ports:
+      - "127.0.0.1:7770:7770/tcp"
 
   nicotine:
     build: .
