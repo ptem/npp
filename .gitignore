@@ -26,6 +26,8 @@ pynicotine/tests/**/*.wav
 # Ignore venv files
 venv/*
 .env/
+.idea/*
+.junie/*
 
 # Ignore packaging directories and files
 *.json~
@@ -40,3 +42,6 @@ build-aux/flatpak/build-dir/
 build-aux/flatpak/.flatpak-builder/
 build-aux/macos/build/
 build-aux/windows/build/
+
+# Ignore local container data
+npp_data/*
